@@ -1,31 +1,10 @@
 on:
   schedule:
-    # Every Sunday 03:00 AM UAE (23:00 UTC Saturday)
-    - cron: "20 20 * * *"
+    - cron: "0 0 * * *"
 
 jobs:
-  send-email:
+  daily-task:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Send email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com
-          server_port: 587
-          secure: false
-          username: ${{ secrets.EMAIL_USERNAME }}
-          password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "GitHub Actions Scheduled Job"
-          to: ${{ secrets.EMAIL_TO }}
-          from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
-          body: |
-            Hello 👋
-
-            Your scheduled GitHub Actions job ran successfully.
-
-            Time (UTC): $RUN_TIME
-            Repository: ${{ github.repository }}
-
-            Regards,
-            GitHub Actions 🤖
+      - name: Print message
+        run: echo "Running the scheduled task"
